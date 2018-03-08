@@ -10,6 +10,8 @@ const Promise = require('bluebird');
 const categoryList = require('../category_map.json');
 const moment = require('moment');
 
+console.log('~~~~~~~~here~~~~~~~~~~~~~~')
+
 
 knex.raw('DROP DATABASE IF EXISTS kickit;').then( () => {
   knex.raw('CREATE DATABASE kickit;').then( () => {
