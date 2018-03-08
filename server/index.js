@@ -35,9 +35,9 @@ app.get('/initialLoad', (req, res) => {
     url: 'https://www.eventbriteapi.com/v3/events/search',
     qs:
       {
-        // 'start_date.keyword': 'this_month',
-        'start_date.range_start': '2017-11-27T19:00:00',
-        'start_date.range_end': '2017-12-30T19:00:00',
+        'start_date.keyword': 'this_month',
+        // 'start_date.range_start': '2017-11-27T19:00:00',
+        // 'start_date.range_end': '2017-12-30T19:00:00',
         'location.address': 'san francisco',
         categories: '103,110,113,116,17001,104,105,102,118,108,109',
         page: 1,
