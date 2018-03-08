@@ -29,6 +29,7 @@ app.get('/initialLoad', (req, res) => {
   let holder = [];
   const start = moment().format();
   const end = moment().add(30, 'day').format();
+  console.log('~~~~~~~~~~~~~~~~~here~~~~~~~~~~~~');
 
   const month_options = {
     method: 'GET',
@@ -48,6 +49,7 @@ app.get('/initialLoad', (req, res) => {
 
   const getCalls = () => new Promise((resolve, reject) => {
     request(month_options, (error, response, body) => {
+      console.log(body);
       const page = JSON.parse(body).pagination.page_number;
       const parsedEvents = JSON.parse(body).events;
       if (!error) {
