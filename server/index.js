@@ -6,7 +6,7 @@ const getEvents = require('../lib/eventbrite.js');
 const Promise = require('bluebird');
 const PORT = process.env.PORT || 3000;
 const moment = require('moment');
-const API_key = require('../config.js').API_key;
+const { API_key } = process.env;
 
 const app = express();
 
