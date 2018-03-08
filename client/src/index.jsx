@@ -2,57 +2,77 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchBarContainer from './components/SearchBarContainer.jsx';
 import EventListContainer from './components/EventListContainer.jsx';
-import WeekendListContainer from './components/WeekendListContainer.jsx';
+//import WeekendListContainer from './components/WeekendListContainer.jsx';
 
 class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			today: [],
-			week: [],
+			featured: [],
+			weekend: [],
 		}
 	}
 	componentDidMount() {
-		fetch('/loadWeekend')
+		fetch('/initialLoad')
+			.then((response) =>{
+				return response.json();
+			})
+			.then((data) =>{
+				this.setState({
+					featured: data.today,
+				});
+			})
+		.then(()=>{
+			fetch('/weekend')
 			.then((response) =>{
 				return response.json();
 			})
 			.then((data) =>{
 				let events = JSON.parse(data).events;
 				this.setState({
-					week: events,
+					weekend: events,
 				});
-				console.log(this.state.week.length);
-			});
-		fetch('/loadToday')
-			.then((response) =>{
-				return response.json()
 			})
-			.then((data) =>{
-				let events = JSON.parse(data).events;
-				this.setState({
-					today: events,
-				});
-				console.log(this.state.today.length);
-			});
+		})
+	}
+
+	runFilters(filters) {
+		fetch('/filter', {
+			headers: {
+				//'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
+			method: 'POST',
+			body: JSON.stringify(filters),
+		})
+		.then((response)=> {
+
+			return response.json();
+		})
+		.then((events)=> {
+			this.setState({
+				featured: events.rows
+			})
+		})
 	}
 
 	render() {
 		return (
 			<div>
 				<h1>Kick It</h1>
-				<SearchBarContainer />
+				<SearchBarContainer runFilters={this.runFilters.bind(this)}/>
 				<div className="album text-muted">
 					<div className="container">
-						<EventListContainer />
+						<EventListContainer 
+							featuredEvents={this.state.featured}
+							weekendEvents={this.state.weekend.slice(0,10)} 
+						/>
 					</div>
 				</div>
-				<WeekendListContainer />
+				
 			</div>
 		)
 	}
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-// using fetch in the post request. data field (in ajax) is the body

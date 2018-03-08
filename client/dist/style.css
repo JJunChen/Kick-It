@@ -22,3 +22,8 @@ img {
   padding-bottom: 3rem;
   background-color: #f7f7f7;
 }
+#weekend-events-btn {
+  background-color: blue;
+  position: absolute;
+  right: 0;
+}
