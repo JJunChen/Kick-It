@@ -1,14 +1,10 @@
-  module.exports = {
+module.exports = {
   development: {
     client: 'pg',
-    connection: {
-    	hostname: 'postgres',
-    	host: 'localhost',
-    	port: '5432'
-    }
+    connection: process.env.DATABASE_URL,
   },
   production: {
-	client: 'pg',
-	connection: process.env.DATABASE_URL
-  }
-}
+    client: 'pg',
+    connection: process.env.DATABASE_URL,
+  },
+};
