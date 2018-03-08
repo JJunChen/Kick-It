@@ -13,26 +13,26 @@ class App extends Component {
     };
     this.runFilters = this.runFilters.bind(this);
   }
-  componentDidMount() {
-    fetch('/initialLoad')
-      .then(response => response.json())
-      .then((data) => {
-        console.log(data);
-        this.setState({
-          featured: data.today,
-        });
-      })
-      .then(() => {
-        fetch('/weekend')
-          .then(response => response.json())
-          .then((data) => {
-            const { events } = JSON.parse(data);
-            this.setState({
-              weekend: events,
-            });
-          });
-      });
-  }
+  // componentDidMount() {
+  //   fetch('/initialLoad')
+  //     .then(response => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       this.setState({
+  //         featured: data.today,
+  //       });
+  //     })
+  //     .then(() => {
+  //       fetch('/weekend')
+  //         .then(response => response.json())
+  //         .then((data) => {
+  //           const { events } = JSON.parse(data);
+  //           this.setState({
+  //             weekend: events,
+  //           });
+  //         });
+  //     });
+  // }
 
   runFilters(filters) {
     fetch('/filter', {
