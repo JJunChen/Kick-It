@@ -2,9 +2,9 @@ import React from 'react';
 import { Menu, Image, Icon, Header } from 'semantic-ui-react';
 import moment from 'moment';
 
-const WeekendEvent = () => (
+const WeekendEvent = props => (
   <Menu.Item>
-    {this.props.event.name.text}<div>{moment(this.props.event.start.local).calendar()}</div>
+    {props.event.name.text}<div>{moment(props.event.start.local).calendar()}</div>
   </Menu.Item>
 );
 
