@@ -13,13 +13,13 @@ const moment = require('moment');
 console.log('~~~~~~~~here~~~~~~~~~~~~~~')
 
 
-knex.raw('DROP DATABASE IF EXISTS kickit;').then( () => {
-  knex.raw('CREATE DATABASE kickit;').then( () => {
-    knex.destroy();
-    config[dev]['connection']['database'] = 'kickit';
-    knex = require('knex')(config[dev]);
-    module.exports = knex;
-  }).then( () => {
+// knex.raw('DROP DATABASE IF EXISTS kickit;').then( () => {
+//   knex.raw('CREATE DATABASE kickit;').then( () => {
+//     knex.destroy();
+//     config[dev]['connection']['database'] = 'kickit';
+//     knex = require('knex')(config[dev]);
+//     module.exports = knex;
+//   }).then( () => {
     // knex.raw(`DROP TABLE IF EXISTS venues;`).then( () => {
       knex.schema.createTable('venues', (table) => {
         table.string('id').primary();
@@ -57,8 +57,8 @@ knex.raw('DROP DATABASE IF EXISTS kickit;').then( () => {
         })
       })
     })
-  })
-});
+//   })
+// });
 
 //==========================================================================================
 //                    Events Table
