@@ -1,19 +1,12 @@
 import React from 'react';
-import { Menu, Image, Icon, Header } from 'semantic-ui-react'
+import { Menu, Image, Icon, Header } from 'semantic-ui-react';
 import moment from 'moment';
 
-class WeekendEvent extends React.Component{
-	constructor(props) {
-		super(props)
-	}
+const WeekendEvent = () => (
+  <Menu.Item>
+    {this.props.event.name.text}<div>{moment(this.props.event.start.local).calendar()}</div>
+  </Menu.Item>
+);
 
-	render() {
-		return(
-			<Menu.Item>
-			{this.props.event.name.text}<div>{moment(this.props.event.start.local).calendar()}</div>
-			</Menu.Item>
-		)
-	}
-}
 
 export default WeekendEvent;

@@ -17,7 +17,6 @@ class App extends Component {
     fetch('/initialLoad')
       .then(response => response.json())
       .then((data) => {
-        console.log(data);
         this.setState({
           featured: data.today,
         });
@@ -37,7 +36,6 @@ class App extends Component {
   runFilters(filters) {
     fetch('/filter', {
       headers: {
-        // 'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       method: 'POST',
