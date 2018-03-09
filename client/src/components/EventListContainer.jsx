@@ -28,7 +28,7 @@ class EventListContainer extends React.Component {
       .map((event, index) => <WeekendEvent event={event} key={index} />);
 
     return (
-      <div>
+      <div className="custom">
         <Button onClick={this.toggleVisibility}>Weekend Events</Button>
         <Sidebar.Pushable as={Segment}>
           <Sidebar
@@ -45,12 +45,10 @@ class EventListContainer extends React.Component {
           </Sidebar>
           <Sidebar.Pusher>
             <Segment basic className="row">
-              <div className="sidebar" />
+              {todayRows}
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
-        <div className="row">{todayRows}</div>
-
       </div>
     );
   }

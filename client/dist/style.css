@@ -27,6 +27,6 @@ img {
   position: absolute;
   right: 0;
 }
-.sidebar {
-  height: 80%
+.ui.custom.sidebar {
+  height: 80%;
 }
