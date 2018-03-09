@@ -49,6 +49,7 @@ class EventListContainer extends React.Component {
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
+        {todayRows}
       </div>
     );
   }
