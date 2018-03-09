@@ -11,40 +11,40 @@ const Promise = require('bluebird');
 const categoryList = require('../category_map.json');
 const moment = require('moment');
 
-// knex.raw(`DROP TABLE IF EXISTS venues;`).then( () => {
-knex.schema.createTable('venues', (table) => {
-  table.string('id').primary();
-  table.text('address', 'longtext');
-  table.string('name');
-}).then(() => {
-  // knex.raw(`DROP TABLE IF EXISTS categories;`).then( () => {
-  knex.schema.createTable('categories', (table) => {
+knex.raw('DROP TABLE IF EXISTS venues;').then(() => {
+  knex.schema.createTable('venues', (table) => {
     table.string('id').primary();
-    table.string('shortname');
+    table.text('address', 'longtext');
     table.string('name');
   }).then(() => {
-    console.log('Inserting values to categories table..');
-    Promise.resolve(addCategories(categoryList)).then(() => {
-      knex.raw('DROP TABLE IF EXISTS events;').then(() => {
-        console.log('Creating events table..');
-        knex.schema.createTable('events', (table) => {
-          table.string('id').primary();
-          table.string('name');
-          table.text('description', 'longtext');
-          table.string('venue_id');
-          // table.foreign('venue_id').references('venues.id');
-          table.string('price');
-          table.varchar('url');
-          table.varchar('image_url');
-          table.dateTime('start_datetime');
-          table.dateTime('end_datetime');
-          table.string('day');
-          table.string('category_id');
-          table.foreign('category_id').references('categories.id');
-        }).catch((err) => { console.log(err); });
+    knex.raw('DROP TABLE IF EXISTS categories;').then(() => {
+      knex.schema.createTable('categories', (table) => {
+        table.string('id').primary();
+        table.string('shortname');
+        table.string('name');
+      }).then(() => {
+        console.log('Inserting values to categories table..');
+        Promise.resolve(addCategories(categoryList)).then(() => {
+          knex.raw('DROP TABLE IF EXISTS events;').then(() => {
+            console.log('Creating events table..');
+            knex.schema.createTable('events', (table) => {
+              table.string('id').primary();
+              table.string('name');
+              table.text('description', 'longtext');
+              table.string('venue_id');
+              // table.foreign('venue_id').references('venues.id');
+              table.string('price');
+              table.varchar('url');
+              table.varchar('image_url');
+              table.dateTime('start_datetime');
+              table.dateTime('end_datetime');
+              table.string('day');
+              table.string('category_id');
+              table.foreign('category_id').references('categories.id');
+            }).catch((err) => { console.log(err); });
+          });
+        });
       });
-      // })
-      // })
     });
   });
 });
@@ -120,7 +120,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       resolve(knex.raw(query).catch((err) => {
         console.log('Error occurred finding events: ', err);
-      }) );
+      }));
     }).catch((err) => {
       throw err;
     });
