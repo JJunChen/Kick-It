@@ -69,7 +69,6 @@ app.get('/initialLoad', (req, res) => {
 
   getCalls()
     .then((holder) => {
-      console.log(holder.length);
       return holder.map((event) => {
         const imageUrl = event.logo ? event.logo.url : 'https://cdn.evbstatic.com/s3-build/perm_001/f8c5fa/django/images/discovery/default_logos/4.png';
         const catID = event.subcategory_id === 17001 ? event.subcategory_id : event.category_id;

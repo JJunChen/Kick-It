@@ -72,7 +72,7 @@ module.exports = {
   // {name: '', description: '', venue_id: '', price: '', url: '', image_url: '', start_datetime: '', end_datetime: '', category_id: '' }
   addEvents: eventsList => new Promise((resolve, reject) => {
     eventsList.forEach((event) => {
-      Promise.resolve(knex.raw(`INSERT INTO events (id, name, description, venue_id, price, url, image_url, start_datetime, end_datetime, category_id) VALUES ('${event.id}', ${event.name}, ${event.description}, '${event.venue_id}', '${event.price}', '${event.url}', '${event.image_url}', '${event.start_datetime}', '${event.end_datetime}', '${event.category_id}') ON CONFLICT UPDATE`)).then((results) => {
+      Promise.resolve(knex.raw(`INSERT INTO events (id, name, description, venue_id, price, url, image_url, start_datetime, end_datetime, category_id) VALUES ('${event.id}', ${event.name}, ${event.description}, '${event.venue_id}', '${event.price}', '${event.url}', '${event.image_url}', '${event.start_datetime}', '${event.end_datetime}', '${event.category_id}') ON CONFLICT DO NOTHING`)).then((results) => {
         resolve(results);
       }).catch((err) => {
         console.log('Error occurred adding events: ', err);
